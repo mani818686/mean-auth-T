@@ -1,3 +1,4 @@
+import { AuthGuard } from './auth.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PremiumComponent } from './premium/premium.component';
@@ -10,7 +11,7 @@ const routes: Routes = [
   {path:'premium', component:PremiumComponent},
   {path:'login', component:LoginComponent},
   {path:'signup', component:SignupComponent},
-  {path:'profile', component:ProfileComponent},
+  {path:'profile', component:ProfileComponent,canActivate:[AuthGuard]},
   {path:'', component:HomeComponent},
   {path:'**', redirectTo:''}
 ];

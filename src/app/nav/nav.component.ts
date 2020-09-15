@@ -1,3 +1,5 @@
+
+import { AuthService, User } from './../auth.service';
 import { Component, OnInit } from '@angular/core';
 
 
@@ -8,9 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private auth:AuthService) {}
+  user:User;
   ngOnInit(): void {
+    this.auth.userStatus.subscribe((usr)=>
+    {
+      this.user=usr;
+    })
   }
 
 }

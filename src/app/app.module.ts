@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { PremiumComponent } from './premium/premium.component';
 import { ProfileComponent } from './profile/profile.component';
+import { SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider} from 'angularx-social-login';
 
 @NgModule({
   declarations: [
@@ -22,9 +23,32 @@ import { ProfileComponent } from './profile/profile.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    SocialLoginModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '709679406974-ct18mkgug340hf9682gmkm04qhgj8rj4.apps.googleusercontent.com'
+            ),
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider(
+              '771842850055589'
+            ),
+          }
+        ]
+      } as SocialAuthServiceConfig,
+    }
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

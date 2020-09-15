@@ -8,15 +8,15 @@
             <a class="nav-item nav-link" routerLink="premium">Premium</a>
         </div>
         <div class="navbar-nav ml-auto">
-            <a class="nav-item nav-link" routerLink="login"><i class="fas fa-sign-in-alt"></i></a>
-            <a class="nav-item nav-link" routerLink="signup"><i class="fas fa-user-plus"></i></a>
-            <div class="nav-item dropdown">
+            <a class="nav-item nav-link" *ngIf="!user.isLoggedIn" routerLink="login"><i class="fas fa-sign-in-alt"></i></a>
+            <a class="nav-item nav-link" *ngIf="!user.isLoggedIn" routerLink="signup"><i class="fas fa-user-plus"></i></a>
+            <div class="nav-item dropdown" *ngIf="user.isLoggedIn">
                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown">
-                    <i class="fas fa-user-circle"></i>
+                   <img [src]="user.details.photoUrl" width=30px heigth=30px class="rounded-circle">
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <a class="dropdown-item" routerLink="profile">Profile</a>
-                    <a class="dropdown-item" >Logout</a>
+                    <a class="dropdown-item" (click)="auth.Logout()" >Logout</a>
                 </div>
             </div>
         </div>
