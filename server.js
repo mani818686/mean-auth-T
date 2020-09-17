@@ -6,7 +6,7 @@ const cookieparser=require('cookie-parser');
 const MongoStore=require("connect-mongo")(session);
 
 // DON'T HARDCODE connection string here, read it from process.env
-const connectionString = "mongodb+srv://dbuser:dbuser@cluster0.vsbgp.mongodb.net/auth?retryWrites=true&w=majority"
+const connectionString = "mongodb+srv://dbuser:dbuser@cluster0.vsbgp.mongodb.net/auth?retryWrites=true&w=majority";
 const dbOptions = { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true, auto_reconnect: true };
 mongoose.connect(connectionString, dbOptions);
 mongoose.connection.on('connected', function () {
@@ -24,15 +24,19 @@ app.use(cors());
 app.use(express.urlencoded({extended:true}))
 app.use(session({
     secret: 'mysecret',
-    saveUninitialized: true,
-    resave:false,
+    saveUninitialized: false,
+    resave:true,
     store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
-app.use((req,res,next)=>
+app.get('/api/session',(req,res)=>
 {
     console.log(JSON.stringify(req.session));
-    next();
-})
+    if(req.session && req.session.email)
+        res.json({session:req.session.email,status:true});
+    else
+    res.json({session:null,status:false});      
+}
+)
 const { OAuth2Client } = require('google-auth-library');
 const { stringify } = require('querystring');
 const { json } = require('express');
@@ -68,6 +72,7 @@ app.post('/api/google/verify', async (req, res) => {
         let payload = await verify(req.body.token);
         if(payload.email_verified)
             req.session.email=payload.email;
+        //console.log(JSON.stringify(req.session));
         let user = await User.findOne({ email: payload.email });
         if (!user) {
             var newUser = new User(
@@ -77,34 +82,10 @@ app.post('/api/google/verify', async (req, res) => {
         }
         res.json({ msg: "Okay"});
     } catch (e) {
-        console.log('Err while g verify ' + e);
+        console.log('Err while google verify ' + e);
         res.status(401).json({ msg: "Noooo" });
     }
 })
-
-app.use('/api/profile',function(req,res,next){
-
-    console.log(JSON.stringify(req.session));
-    if(!req.session.email)
-    {
-        res.redirect('/');
-    }
-    next();
-})
-app.get('/api/profile',(req,res)=>
-{
-    res.send("hello");
-})
-
-
-
-
-
-
-
-
-
-
 
 
 const PORT = process.env.PORT || 3000;

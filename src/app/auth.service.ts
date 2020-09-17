@@ -4,25 +4,25 @@ import { BehaviorSubject } from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import { Router } from '@angular/router';
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  currentUser:User=new User()
+  currentUser:User=new User();
+  session;
   userStatus=new BehaviorSubject<User>(this.currentUser);
   constructor(private auth:SocialAuthService,private http:HttpClient,private router:Router) { }
   async googleLogin() {
     try {
       let socialUser = await this.auth.signIn(GoogleLoginProvider.PROVIDER_ID);
-
-      let res = await this.http.post('https://social--auth.herokuapp.com/api/google/verify', {token: socialUser.idToken}).toPromise();
-      console.log(res);
+      //console.log(JSON.stringify(socialUser));
+    let res = await this.http.post('http://localhost:3000/api/google/verify', {token: socialUser.idToken}).toPromise();
+    this.checksession();
       this.currentUser.setUser(true, socialUser);
-//console.log(JSON.stringify(socialUser));
+      //console.log(JSON.stringify(socialUser));
       this.userStatus.next(this.currentUser);
-    } catch {
-      console.log("error occured");
+    } catch(e){
+      console.log("error occured"+e);
     }
   }
   async Logout() {
@@ -32,16 +32,19 @@ export class AuthService {
     this.router.navigateByUrl("login");
   }
   async fbLogin() {
-    // Login success
     try {
       let socialUser = await this.auth.signIn(FacebookLoginProvider.PROVIDER_ID);
       this.currentUser.setUser(true, socialUser);
       this.userStatus.next(this.currentUser);
-    } catch {
-      console.log("error occured");
+    } catch(e) {
+      console.log("error occured"+e);
     }
   }
-  
+  async checksession()
+    {
+     this.session= await this.http.get('http://localhost:3000/api/session').toPromise();
+     console.log(this.session);
+    }
 }
 
 export class User
