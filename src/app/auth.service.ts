@@ -47,12 +47,7 @@ export class AuthService {
   }
    checksession()
     {
-<<<<<<< HEAD
       return this.http.get('https://social--auth.herokuapp.com/api/session');
-=======
-     this.session= await this.http.get('https://social--auth.herokuapp.com/api/session').toPromise();
-     console.log(this.session);
->>>>>>> 176591bd086c14642961fcd5077d0efa79525cc6
     }
   
 }
