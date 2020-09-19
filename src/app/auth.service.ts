@@ -19,6 +19,10 @@ export class AuthService {
     let res = await this.http.post('https://social--auth.herokuapp.com/api/google/verify', {token: socialUser.idToken}).toPromise();
     this.currentUser.setUser(true, socialUser);
     console.log(this.session);
+    this.checksession();
+      this.currentUser.setUser(true, socialUser);
+      //console.log(JSON.stringify(socialUser));
+
       this.userStatus.next(this.currentUser);
     } catch(e){
       console.log("error occured"+e);
@@ -43,8 +47,14 @@ export class AuthService {
   }
    checksession()
     {
+<<<<<<< HEAD
       return this.http.get('https://social--auth.herokuapp.com/api/session');
+=======
+     this.session= await this.http.get('https://social--auth.herokuapp.com/api/session').toPromise();
+     console.log(this.session);
+>>>>>>> 176591bd086c14642961fcd5077d0efa79525cc6
     }
+  
 }
 
 export class User
