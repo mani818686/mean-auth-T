@@ -31,6 +31,7 @@ export class AuthService {
   async Logout() {
     await this.auth.signOut();
     this.currentUser.setUser(false, null);
+    
     this.userStatus.next(this.currentUser);
     this.router.navigateByUrl("login");
     this.session={'session':null,'status':false};
