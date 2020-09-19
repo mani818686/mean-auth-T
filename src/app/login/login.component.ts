@@ -15,10 +15,15 @@ export class LoginComponent implements OnInit {
   }
 loginwithgoogle()
 {
-this.auth.googleLogin();
+  this.auth.checksession().subscribe((d)=>
+  {
+    this.auth.session=d;
+  })
+  this.auth.googleLogin();
 }
 loginwithfb()
 {
   this.auth.fbLogin();
 }
+
 }

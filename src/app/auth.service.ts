@@ -9,17 +9,16 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   currentUser:User=new User();
-  session;
+    session;
   userStatus=new BehaviorSubject<User>(this.currentUser);
   constructor(private auth:SocialAuthService,private http:HttpClient,private router:Router) { }
   async googleLogin() {
     try {
       let socialUser = await this.auth.signIn(GoogleLoginProvider.PROVIDER_ID);
       //console.log(JSON.stringify(socialUser));
-    let res = await this.http.post('http://localhost:3000/api/google/verify', {token: socialUser.idToken}).toPromise();
-    this.checksession();
-      this.currentUser.setUser(true, socialUser);
-      //console.log(JSON.stringify(socialUser));
+    let res = await this.http.post('https://social--auth.herokuapp.com/api/google/verify', {token: socialUser.idToken}).toPromise();
+    this.currentUser.setUser(true, socialUser);
+    console.log(this.session);
       this.userStatus.next(this.currentUser);
     } catch(e){
       console.log("error occured"+e);
@@ -30,6 +29,8 @@ export class AuthService {
     this.currentUser.setUser(false, null);
     this.userStatus.next(this.currentUser);
     this.router.navigateByUrl("login");
+    this.session={'session':null,'status':false};
+    console.log(this.session);
   }
   async fbLogin() {
     try {
@@ -40,10 +41,9 @@ export class AuthService {
       console.log("error occured"+e);
     }
   }
-  async checksession()
+   checksession()
     {
-     this.session= await this.http.get('http://localhost:3000/api/session').toPromise();
-     console.log(this.session);
+      return this.http.get('https://social--auth.herokuapp.com/api/session');
     }
 }
 

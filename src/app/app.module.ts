@@ -14,6 +14,7 @@ import { PremiumComponent } from './premium/premium.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider} from 'angularx-social-login';
 
+
 @NgModule({
   declarations: [
     AppComponent,

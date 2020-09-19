@@ -24,19 +24,15 @@ app.use(cors());
 app.use(express.urlencoded({extended:true}))
 app.use(session({
     secret: 'mysecret',
-    saveUninitialized: false,
+    saveUninitialized: true,
     resave:true,
     store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
-app.get('/api/session',(req,res)=>
+app.use((req,res,next)=>
 {
     console.log(JSON.stringify(req.session));
-    if(req.session && req.session.email)
-        res.json({session:req.session.email,status:true});
-    else
-    res.json({session:null,status:false});      
-}
-)
+    next();
+})
 const { OAuth2Client } = require('google-auth-library');
 const { stringify } = require('querystring');
 const { json } = require('express');
@@ -72,7 +68,7 @@ app.post('/api/google/verify', async (req, res) => {
         let payload = await verify(req.body.token);
         if(payload.email_verified)
             req.session.email=payload.email;
-        //console.log(JSON.stringify(req.session));
+        console.log(JSON.stringify(req.session));
         let user = await User.findOne({ email: payload.email });
         if (!user) {
             var newUser = new User(
@@ -87,6 +83,14 @@ app.post('/api/google/verify', async (req, res) => {
     }
 })
 
-
+app.get('/api/session',(req,res)=>
+{
+    console.log(JSON.stringify(req.session));
+    if(req.session && req.session.email)
+        res.json({session:req.session.email,status:true});
+    else
+    res.json({session:null,status:false});      
+}
+)
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => { console.log("Server started...") });
