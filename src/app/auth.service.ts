@@ -45,6 +45,7 @@ export class AuthService {
      this.session= await this.http.get('https://social--auth.herokuapp.com/api/session').toPromise();
      console.log(this.session);
     }
+  
 }
 
 export class User
