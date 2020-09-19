@@ -42,7 +42,7 @@ export class AuthService {
   }
   async checksession()
     {
-     this.session= await this.http.get('http://localhost:3000/api/session').toPromise();
+     this.session= await this.http.get('https://social--auth.herokuapp.com/api/session').toPromise();
      console.log(this.session);
     }
 }
