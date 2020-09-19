@@ -16,7 +16,7 @@ export class AuthService {
     try {
       let socialUser = await this.auth.signIn(GoogleLoginProvider.PROVIDER_ID);
       //console.log(JSON.stringify(socialUser));
-    let res = await this.http.post('http://localhost:3000/api/google/verify', {token: socialUser.idToken}).toPromise();
+    let res = await this.http.post('https://social--auth.herokuapp.com/api/google/verify', {token: socialUser.idToken}).toPromise();
     this.checksession();
       this.currentUser.setUser(true, socialUser);
       //console.log(JSON.stringify(socialUser));
