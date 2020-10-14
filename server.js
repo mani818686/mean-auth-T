@@ -96,5 +96,13 @@ app.get('/logout',(req,res)=>
     res.json({status:true});
 }
 )
+app.get("/details",(req,res)=>
+{
+    if(req.session.user)
+    res.json(JSON.stringify(req.session.user));
+    else
+    res.json({});
+
+})
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => { console.log("Server started...") });
