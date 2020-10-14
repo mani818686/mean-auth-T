@@ -14,8 +14,8 @@ export class AuthService {
   async googleLogin() {
     try {
     let socialUser = await this.auth.signIn(GoogleLoginProvider.PROVIDER_ID);
-    let res = await this.http.post('http://localhost:3000/api/google/verify', {token: socialUser.idToken}).toPromise();
-    let status=await this.http.get('http://localhost:3000/api/session').toPromise(); 
+    let res = await this.http.post('https://social--auth.herokuapp.com//api/google/verify', {token: socialUser.idToken}).toPromise();
+    let status=await this.http.get('https://social--auth.herokuapp.com//api/session').toPromise(); 
     this.user=status["user"];
     console.log(this.user);
     } catch(e){
@@ -24,7 +24,7 @@ export class AuthService {
   }
   async Logout() {
     await this.auth.signOut();
-    let resp=await this.http.get('http://localhost:3000/logout').toPromise();
+    let resp=await this.http.get('https://social--auth.herokuapp.com/logout').toPromise();
     console.log("user logged out");
     
     console.log(resp);
@@ -33,7 +33,7 @@ export class AuthService {
   async fbLogin() {
     try {
       let socialUser = await this.auth.signIn(FacebookLoginProvider.PROVIDER_ID);
-    let status=await this.http.get('http://localhost:3000/api/session').toPromise(); 
+    let status=await this.http.get('https://social--auth.herokuapp.com/api/session').toPromise(); 
     this.user=status["user"];
     console.log(this.user);
     } catch(e) {
