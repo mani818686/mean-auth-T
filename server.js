@@ -30,12 +30,13 @@ app.use(session({
 }));
 app.use((req,res,next)=>
 {
-    console.log(JSON.stringify(req.session));
+    console.log(req.session);
     next();
 })
 const { OAuth2Client } = require('google-auth-library');
 const { stringify } = require('querystring');
 const { json } = require('express');
+const { LOG_LOG } = require('karma/lib/constants');
 const client = new OAuth2Client('709679406974-ct18mkgug340hf9682gmkm04qhgj8rj4.apps.googleusercontent.com');
 async function verify(token) {
     const ticket = await client.verifyIdToken({
@@ -67,8 +68,8 @@ app.post('/api/google/verify', async (req, res) => {
     try {
         let payload = await verify(req.body.token);
         if(payload.email_verified)
-            req.session.email=payload.email;
-        console.log(JSON.stringify(req.session));
+            req.session.user={name: payload.name, photoUrl: payload.picture };
+        console.log(req.session);
         let user = await User.findOne({ email: payload.email });
         if (!user) {
             var newUser = new User(
@@ -78,18 +79,24 @@ app.post('/api/google/verify', async (req, res) => {
         }
         res.json({ msg: "Okay"});
     } catch (e) {
-        console.log('Err while google verify ' + e);
+        console.log('Error while google verify ' + e);
         res.status(401).json({ msg: "Noooo" });
     }
 })
 
 app.get('/api/session',(req,res)=>
 {
-    console.log(JSON.stringify(req.session));
-    if(req.session && req.session.email)
-        res.json({session:req.session.email,status:true});
+    if(req.session && req.session.user)
+        res.json({'user':req.session.user,'status':true});
     else
-    res.json({session:null,status:false});      
+    res.json({'user':null,'status':false});      
+}
+)
+app.get('/logout',(req,res)=>
+{
+    console.log(req.session)
+    req.session.destroy();
+    res.json({status:true});
 }
 )
 const PORT = process.env.PORT || 3000;

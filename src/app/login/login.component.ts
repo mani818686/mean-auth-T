@@ -15,10 +15,6 @@ export class LoginComponent implements OnInit {
   }
 loginwithgoogle()
 {
-  this.auth.checksession().subscribe((d)=>
-  {
-    this.auth.session=d;
-  })
   this.auth.googleLogin();
 }
 loginwithfb()
