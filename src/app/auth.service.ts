@@ -14,8 +14,8 @@ export class AuthService {
   async googleLogin() {
     try {
     let socialUser = await this.auth.signIn(GoogleLoginProvider.PROVIDER_ID);
-    let res = await this.http.post('https://social--auth.herokuapp.com//api/google/verify', {token: socialUser.idToken}).toPromise();
-    let status=await this.http.get('https://social--auth.herokuapp.com//api/session').toPromise(); 
+    let res = await this.http.post('https://social--auth.herokuapp.com/api/google/verify', {token: socialUser.idToken}).toPromise();
+    let status=await this.http.get('https://social--auth.herokuapp.com/api/session').toPromise(); 
     this.user=status["user"];
     console.log(this.user);
     } catch(e){
