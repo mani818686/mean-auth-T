@@ -24,7 +24,14 @@ export class AuthService {
   }
   async Logout() {
     await this.auth.signOut();
-    let resp=await this.http.get('https://social--auth.herokuapp.com/logout').toPromise();
+    var resp;
+    try{
+      resp=await this.http.get('https://social--auth.herokuapp.com/logout').toPromise();
+    }
+    catch(e)
+    {console.log(e);
+    }
+    
     console.log("user logged out");
     console.log(resp);
     this.user=null;

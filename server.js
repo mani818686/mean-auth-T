@@ -91,7 +91,7 @@ app.get('/api/session',(req,res)=>
 }
 )
 app.get('/logout',(req,res)=>
-{
+{   
     console.log(req.session)
     req.session.destroy();
     res.json({status:true});
