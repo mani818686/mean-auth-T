@@ -23,14 +23,14 @@ export class AuthService {
     }
   }
   async Logout() {
-    if(this.user)
-    await this.auth.signOut();
     var resp;
     try{
+      await this.auth.signOut();
       resp=await this.http.get('https://social--auth.herokuapp.com/logout').toPromise();
     }
     catch(e)
-    {console.log(e);
+    { console.log("user are already logged out! make sure u r login");
+      console.log(e);
     }
     
     console.log("user logged out");
