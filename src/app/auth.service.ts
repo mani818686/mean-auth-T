@@ -23,6 +23,7 @@ export class AuthService {
     }
   }
   async Logout() {
+    if(this.user)
     await this.auth.signOut();
     var resp;
     try{
