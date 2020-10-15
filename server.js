@@ -84,9 +84,10 @@ app.post('/api/google/verify', async (req, res) => {
 app.get('/api/session',(req,res)=>
 {
     if(req.session && req.session.user)
-        res.json({'user':req.session.user,'status':true});
+    res.json({user:req.session.user});
     else
-    res.json({'user':null,'status':false});      
+    res.json({user:null});
+      
 }
 )
 app.get('/logout',(req,res)=>
@@ -96,13 +97,6 @@ app.get('/logout',(req,res)=>
     res.json({status:true});
 }
 )
-app.get("/details",(req,res)=>
-{
-    if(req.session.user)
-    res.json(JSON.stringify(req.session.user));
-    else
-    res.json({});
 
-})
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => { console.log("Server started...") });

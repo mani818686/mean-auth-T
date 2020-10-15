@@ -32,12 +32,16 @@ export class AuthService {
   async fbLogin() {
     try {
       let socialUser = await this.auth.signIn(FacebookLoginProvider.PROVIDER_ID);
-    let status=await this.http.get('https://social--auth.herokuapp.com/api/session').toPromise(); 
-    this.user=status["user"];
-    console.log(this.user);
+   
     } catch(e) {
       console.log("error occured"+e);
     }
+  }
+  async checkloggedin()
+  {
+    let status=await this.http.get('https://social--auth.herokuapp.com/api/session').toPromise(); 
+    this.user=status["user"];
+    console.log(this.user);
   }
  
 }

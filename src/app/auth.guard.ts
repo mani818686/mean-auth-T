@@ -8,7 +8,7 @@ import {HttpClient} from '@angular/common/http';
 })
 export class AuthGuard implements CanActivate {
   session;
-  constructor(private auth:AuthService,private router:Router,private http:HttpClient){this.http.get("https://social--auth.herokuapp.com/details").subscribe((d)=>
+  constructor(private auth:AuthService,private router:Router,private http:HttpClient){this.http.get("https://social--auth.herokuapp.com/api/session").subscribe((d)=>
   {
     this.session=d;
   })}

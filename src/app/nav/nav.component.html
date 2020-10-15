@@ -9,8 +9,8 @@
             <a class="nav-item nav-link" routerLink="premium">Premium</a>
         </div>
         <div class="navbar-nav ml-auto">
-            <a class="nav-item nav-link" *ngIf="auth.user==null" routerLink="login"><i class="fas fa-sign-in-alt"></i></a>
-            <a class="nav-item nav-link" *ngIf="auth.user==null" routerLink="signup"><i class="fas fa-user-plus"></i></a>
+            <a class="nav-item nav-link" *ngIf="!auth.user" routerLink="login"><i class="fas fa-sign-in-alt"></i></a>
+            <a class="nav-item nav-link" *ngIf="!auth.user" routerLink="signup"><i class="fas fa-user-plus"></i></a>
             <div class="nav-item dropdown" *ngIf="auth.user">
                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown">
                    <img [src]="auth.user.photoUrl" alt="notfound" width=30px heigth=30px class="rounded-circle">
