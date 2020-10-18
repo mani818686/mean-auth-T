@@ -11,7 +11,7 @@ export class UrlsComponent implements OnInit {
 
   constructor(private url:UrlService,private route:Router) { }
   Allurls;
-  Urldata={originalurl:"",shorturl:""};
+  Urldata={originalurl:"",shorturl:"https://social--auth.herokuapp.com/"};
 
   ngOnInit(): void {
     this.getallUrls();
@@ -19,8 +19,8 @@ export class UrlsComponent implements OnInit {
   Create()
   {
     this.url.createUrl(this.Urldata);
-    window.location.reload();
-   
+    console.log(this.Urldata);
+    this.route.navigateByUrl("/urls");
   }
   getallUrls()
   {
