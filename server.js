@@ -100,7 +100,12 @@ app.post("/createurl",async (req,res)=>
 {
    let urldata=req.body.urls;
     console.log(urldata);
-    console.log(req.body.user.name);
+    try{
+         console.log(req.session.user.name);
+    }
+    catch(e){
+        console.log("error occured"+e);
+    }
     var newurl=new Url({username:"mani9989",originalurl:urldata.originalurl,shorturl:urldata.shorturl});
     let url=newurl.save();
     res.json(urldata);
