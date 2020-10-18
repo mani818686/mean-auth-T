@@ -106,7 +106,7 @@ app.post("/createurl",async (req,res)=>
     catch(e){
         console.log("error occured"+e);
     }
-    var newurl=new Url({username:"mani9989",originalurl:urldata.originalurl,shorturl:urldata.shorturl});
+    var newurl=new Url({username:res.session.user.name,originalurl:urldata.originalurl,shorturl:urldata.shorturl});
     let url=newurl.save();
     res.json(urldata);
 });
@@ -121,7 +121,7 @@ app.get('/api/session',(req,res)=>
 )
 app.get('/urls/:username',async (req,res)=>
 {
-    let username=req.params.username||'mani9989';
+    let username=req.params.username;
    let data=await Url.find({username:username});
    res.json({data:data});
 })
