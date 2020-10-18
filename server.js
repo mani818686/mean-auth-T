@@ -96,22 +96,6 @@ app.post('/api/google/verify', async (req, res) => {
     }
 })
 
-app.get('/api/session',(req,res)=>
-{
-    if(req.session && req.session.user)
-    res.json({user:req.session.user});
-    else
-    res.json({user:null});
-      
-}
-)
-app.get('/logout',(req,res)=>
-{   
-    console.log(req.session)
-    req.session.destroy();
-    res.json({status:true});
-}
-)
 app.post("/createurl",async (req,res)=>
 {
    let urldata=req.body.urls;
@@ -121,6 +105,30 @@ app.post("/createurl",async (req,res)=>
     let url=newurl.save();
     res.json(urldata);
 });
+app.get('/api/session',(req,res)=>
+{
+    if(req.session && req.session.user)
+    res.json({user:req.session.user});
+    else
+    res.json({user:null});
+      
+}
+)
+app.get('/urls/:username',async (req,res)=>
+{
+    let username=req.params.username||'mani9989';
+   let data=await Url.find({username:username});
+   res.json({data:data});
+})
+
+app.get('/logout',(req,res)=>
+{   
+    console.log(req.session)
+    req.session.destroy();
+    res.json({status:true});
+}
+)
+
 app.get("/:slug",async (req,res)=>
 {
     let slug=req.params.slug;
@@ -128,14 +136,8 @@ app.get("/:slug",async (req,res)=>
     if(data && data.originalurl && data.shorturl)
     res.redirect(data.originalurl);
     else
-    res.send("no urls exist with"+data);
+    res.send("error page")
 
-})
-app.get('/urls/:username',async (req,res)=>
-{
-    let username=req.params.username||'mani9989';
-   let data=await Url.find({username:username});
-   res.json({data:data});
 })
 
 const PORT = process.env.PORT || 3000;
