@@ -17,7 +17,9 @@ export class UrlService {
   }
    async getUrl()
   { 
-    let user=this.auth.user.name.split(' ')[0]||'mani9989';
+    let user='mani9989';
+    console.log(this.auth.user.name);
+    
     let d=await this.http.get("https://social--auth.herokuapp.com/urls/"+user).toPromise();
     console.log(d["data"]);
     this.urls.next(d["data"]);
