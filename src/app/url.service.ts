@@ -17,11 +17,20 @@ export class UrlService {
   }
    async getUrl()
   { 
-    let status=await this.http.get('https://social--auth.herokuapp.com/api/session').toPromise(); 
-    let user=status["data"].name;
-    console.log(user,status["data"]);
-    
-    let d=await this.http.get("https://social--auth.herokuapp.com/urls/"+user).toPromise();
+    let status=await this.http.get('https://social--auth.herokuapp.com/api/session').toPromise();
+    try{
+      console.log(status["data"]);
+      console.log(status);
+      let user=status["data"].name;
+      console.log(user,status["data"]);
+    }
+    catch(e)
+    {
+      console.log(e);
+      
+    }
+   
+    let d=await this.http.get("https://social--auth.herokuapp.com/urls/"+"mani9989").toPromise();
     console.log(d["data"]);
     this.urls.next(d["data"]);
   }
