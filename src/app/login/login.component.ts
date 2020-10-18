@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
 loginwithgoogle()
 {
   this.auth.googleLogin();
-  this.router.navigateByUrl("/urls");
+  
 }
 loginwithfb()
 {

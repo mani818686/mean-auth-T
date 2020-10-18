@@ -3,6 +3,8 @@ import { SocialAuthService,GoogleLoginProvider,FacebookLoginProvider } from 'ang
 import { BehaviorSubject } from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import { Router } from '@angular/router';
+import { strictEqual } from 'assert';
+import { stringify } from '@angular/compiler/src/util';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +21,9 @@ export class AuthService {
     this.user=status["user"];
     console.log(this.user);
     } catch(e){
-      console.log("error occured"+e);
+      console.log("error occured"+JSON,stringify(e));
     }
+    this.router.navigateByUrl("/urls");
   }
   async Logout() {
     var resp;
