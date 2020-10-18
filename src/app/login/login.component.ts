@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AuthService } from './../auth.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private auth:AuthService) { }
+  constructor(private auth:AuthService,private router:Router) { }
 
   ngOnInit(): void {
     
@@ -16,6 +17,7 @@ export class LoginComponent implements OnInit {
 loginwithgoogle()
 {
   this.auth.googleLogin();
+  this.router.navigateByUrl("/urls");
 }
 loginwithfb()
 {

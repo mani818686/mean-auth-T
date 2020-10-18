@@ -3,6 +3,7 @@ import { AuthService } from './auth.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +14,7 @@ import { SignupComponent } from './signup/signup.component';
 import { PremiumComponent } from './premium/premium.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider} from 'angularx-social-login';
+import { UrlsComponent } from './urls/urls.component';
 
 
 @NgModule({
@@ -23,13 +25,15 @@ import { SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider, Facebo
     LoginComponent,
     SignupComponent,
     PremiumComponent,
-    ProfileComponent
+    ProfileComponent,
+    UrlsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     SocialLoginModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [
     {

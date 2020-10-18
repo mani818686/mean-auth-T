@@ -1,3 +1,5 @@
+import { UrlService } from './../url.service';
+
 
 import { AuthService, User } from './../auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -10,9 +12,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavComponent implements OnInit {
 
-  constructor(public auth:AuthService) {}
+  constructor(public auth:AuthService,private url:UrlService) {}
 
   ngOnInit(): void {
     this.auth.checkloggedin();
+    this.url.getUrl();
+
   }
 }

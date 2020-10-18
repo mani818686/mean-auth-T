@@ -31,9 +31,14 @@ app.use(session({
 app.use((req,res,next)=>
 {
     console.log(req.session);
+    if(req.session.user)
     next();
+    else
+    res.redirect("/");
+    //next();
 })
 const { OAuth2Client } = require('google-auth-library');
+const { stringify } = require('querystring');
 const client = new OAuth2Client('709679406974-ct18mkgug340hf9682gmkm04qhgj8rj4.apps.googleusercontent.com');
 async function verify(token) {
     const ticket = await client.verifyIdToken({
@@ -59,6 +64,16 @@ var userSchema = new mongoose.Schema({
     }
 });
 var User = mongoose.model('User', userSchema);
+
+
+var UrlSchema = new mongoose.Schema({
+    username:String,
+    originalurl:String,
+    shorturl:String,
+    date:{type:Date,default:Date.now}
+});
+var Url = mongoose.model('Url', UrlSchema);
+
 
 
 app.post('/api/google/verify', async (req, res) => {
@@ -97,6 +112,30 @@ app.get('/logout',(req,res)=>
     res.json({status:true});
 }
 )
+app.post("/createurl",async (req,res)=>
+{
+   let urldata=req.body.urls;
+    console.log(urldata);
+    var newurl=new Url({username:req.session.user.name,originalurl:urldata.originalurl,shorturl:urldata.shorturl});
+    let url=newurl.save();
+    res.json(urldata);
+});
+app.get("/:slug",async (req,res)=>
+{
+    let slug=req.params.slug;
+    let data=await Url.findOne({shorturl:slug});
+    if(data && data.originalurl && data.shorturl)
+    res.redirect(data.originalurl);
+    else
+    res.send("no urls exist with"+data);
+
+})
+app.get('/urls/:username',async (req,res)=>
+{
+    let username=req.params.username||'mani9989';
+   let data=await Url.find({username:username});
+   res.json({data:data});
+})
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => { console.log("Server started...") });

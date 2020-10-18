@@ -16,6 +16,7 @@
     "@angular/common": "~10.0.6",
     "@angular/compiler": "~10.0.6",
     "@angular/core": "~10.0.6",
+    "@angular/fire": "^6.0.3",
     "@angular/forms": "~10.0.6",
     "@angular/platform-browser": "~10.0.6",
     "@angular/platform-browser-dynamic": "~10.0.6",
@@ -27,6 +28,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "fb": "^2.0.0",
+    "firebase": "^7.24.0",
     "google-auth-library": "^6.0.6",
     "mongoose": "^5.10.4",
     "nodemon": "^2.0.5",
@@ -52,7 +54,13 @@
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
-    "typescript": "~3.9.5"
+    "typescript": "~3.9.5",
+    "@angular-devkit/architect": ">= 0.900 < 0.1100",
+    "firebase-tools": "^8.0.0",
+    "fuzzy": "^0.1.3",
+    "inquirer": "^6.2.2",
+    "inquirer-autocomplete-prompt": "^1.0.1",
+    "open": "^7.0.3"
   },
   "engines": {
     "node": "12.x",
