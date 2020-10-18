@@ -12,6 +12,7 @@ import { stringify } from '@angular/compiler/src/util';
 export class AuthService {
   public session;
   public user;
+
   constructor(private auth:SocialAuthService,private http:HttpClient,private router:Router) { }
   async googleLogin() {
     try {
@@ -21,7 +22,7 @@ export class AuthService {
     this.user=status["user"];
     console.log(this.user);
     } catch(e){
-      console.log("error occured"+JSON,stringify(e));
+      console.log("error occured"+JSON.stringify(e));
     }
     this.router.navigateByUrl("/urls");
   }
