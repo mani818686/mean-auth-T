@@ -31,11 +31,11 @@ app.use(session({
 app.use((req,res,next)=>
 {
     console.log(req.session);
-    if(req.session.user)
+    // if(req.session.user)
+    // next();
+    // else
+    // res.redirect("/");
     next();
-    else
-    res.redirect("/");
-    //next();
 })
 const { OAuth2Client } = require('google-auth-library');
 const { stringify } = require('querystring');
@@ -116,7 +116,8 @@ app.post("/createurl",async (req,res)=>
 {
    let urldata=req.body.urls;
     console.log(urldata);
-    var newurl=new Url({username:req.session.user.name,originalurl:urldata.originalurl,shorturl:urldata.shorturl});
+    console.log(req.body.user.name);
+    var newurl=new Url({username:"mani9989",originalurl:urldata.originalurl,shorturl:urldata.shorturl});
     let url=newurl.save();
     res.json(urldata);
 });
