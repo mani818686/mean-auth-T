@@ -20,7 +20,7 @@ export class UrlsComponent implements OnInit {
   {
     this.url.createUrl(this.Urldata);
     console.log(this.Urldata);
-    this.ngOnInit();
+    this.getallUrls();
   }
   getallUrls()
   {
