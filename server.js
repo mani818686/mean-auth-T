@@ -137,11 +137,13 @@ app.get('/logout',(req,res)=>
 app.get("/:slug",async (req,res)=>
 {
     let slug=req.params.slug;
-    let data=await Url.findOne({shorturl:slug});
+    let url="https://social--auth.herokuapp.com/"+slug;
+    let data=await Url.findOne({shorturl:url});
+
     if(data && data.originalurl && data.shorturl)
     res.redirect(data.originalurl);
     else
-    res.send("error page")
+    res.send("error page");
 
 })
 
