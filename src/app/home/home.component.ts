@@ -9,13 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private url:UrlService,private route:Router) { }
+  constructor(private url:UrlService,private router:Router) { }
 
   ngOnInit(): void {
+    console.log(this.url.flag);
     if(this.url.flag)
       {
         this.url.flag=false;
-        this.route.navigateByUrl("/urls");
+        this.router.navigateByUrl("/urls");
+        
       }
     
   }

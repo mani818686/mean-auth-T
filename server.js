@@ -69,7 +69,7 @@ var User = mongoose.model('User', userSchema);
 var UrlSchema = new mongoose.Schema({
     username:String,
     originalurl:String,
-    shorturl:String,
+    shorturl:{type:String,unique:true},
     date:{type:Date,default:Date.now}
 });
 var Url = mongoose.model('Url', UrlSchema);
@@ -119,6 +119,16 @@ app.get('/api/session',(req,res)=>
       
 }
 )
+app.get("/checkurl",async (req,res)=>
+{
+    console.log(req.body.shorturl);
+    let data=await Url.find({shorturl:req.body.shorturl});
+    if(data.length==0)
+    res.json({status:"true"});
+    else
+    res.json({status:"false"});  
+
+})
 app.get('/urls/:username',async (req,res)=>
 {
     let username=req.params.username;
