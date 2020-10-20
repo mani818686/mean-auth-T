@@ -9,17 +9,20 @@ import { Router } from '@angular/router';
 export class UrlService {
   urls=new BehaviorSubject<any>("");
   public flag:boolean=false;
-  public iserror:false;
+  public iserror;
   constructor(private http:HttpClient,private route:Router,private auth:AuthService) { }
   
   async createUrl(Urls)
   {
     this.iserror=false;
-    const headers={shorturl:Urls.shorturl};
-    let result = await this.http.get('https://social--auth.herokuapp.com/checkurl',{headers}).toPromise();
+    let result = await this.http.get('https://social--auth.herokuapp.com/checkurl/'+Urls.shorturl).toPromise();
     if(result["status"]){
       let res = await this.http.post('https://social--auth.herokuapp.com/createurl', {urls:Urls}).toPromise();
       this.flag=true;
+    }
+    else
+    {
+      this.iserror=true;
     }
    
   }

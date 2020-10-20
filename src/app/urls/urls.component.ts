@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UrlsComponent implements OnInit {
 
-  constructor(private url:UrlService,private route:Router) { }
+  constructor(public url:UrlService,private route:Router) { }
   Allurls;
   Urldata={originalurl:"",shorturl:"https://social--auth.herokuapp.com/"};
 
