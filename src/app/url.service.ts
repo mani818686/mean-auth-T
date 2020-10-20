@@ -15,7 +15,7 @@ export class UrlService {
   async createUrl(Urls)
   {
     this.iserror=false;
-    let result = await this.http.get('https://social--auth.herokuapp.com/checkurl/'+Urls.shorturl).toPromise();
+    let result = await this.http.get('https://social--auth.herokuapp.com/checkurl/'+encodeURIComponent(Urls.shorturl)).toPromise();
     if(result["status"]){
       let res = await this.http.post('https://social--auth.herokuapp.com/createurl', {urls:Urls}).toPromise();
       this.flag=true;

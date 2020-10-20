@@ -121,8 +121,9 @@ app.get('/api/session',(req,res)=>
 )
 app.get("/checkurl/:shorturl",async (req,res)=>
 {
-    console.log(req.params.shorturl);
-    let data=await Url.find({shorturl:req.params.shorturl});
+    var shorturl=decodeURIComponent(req.params.shorturl);
+    console.log(shorturl);
+    let data=await Url.find({shorturl:shorturl});
     if(data.length==0)
     res.json({status:"true"});
     else
