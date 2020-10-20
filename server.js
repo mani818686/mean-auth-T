@@ -125,9 +125,9 @@ app.get("/checkurl/:shorturl",async (req,res)=>
     console.log(shorturl);
     let data=await Url.find({shorturl:shorturl});
     if(data.length==0)
-    res.json({status:"true"});
+    res.json({status:true});
     else
-    res.json({status:"false"});  
+    res.json({status:false});  
 
 })
 app.get('/urls/:username',async (req,res)=>

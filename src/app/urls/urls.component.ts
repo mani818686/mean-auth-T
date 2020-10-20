@@ -11,16 +11,19 @@ export class UrlsComponent implements OnInit {
 
   constructor(public url:UrlService,private route:Router) { }
   Allurls;
+  display;
   Urldata={originalurl:"",shorturl:"https://social--auth.herokuapp.com/"};
 
   ngOnInit(): void {
     this.getallUrls();
+    this.display=false;
   }
   Create()
   {
     this.url.createUrl(this.Urldata);
     console.log(this.Urldata);
     this.url.flag=true;
+    this.display=true;
     //window.location.href="/";
   }
   getallUrls()
