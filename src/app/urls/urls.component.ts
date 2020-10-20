@@ -20,8 +20,6 @@ export class UrlsComponent implements OnInit {
   {
     this.url.createUrl(this.Urldata);
     console.log(this.Urldata);
-    this.getallUrls();
-    this.url.flag=true;
     window.location.href="/";
   }
   getallUrls()

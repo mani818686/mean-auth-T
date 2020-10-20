@@ -13,7 +13,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.url.flag)
-      {this.url.flag=false;
+      {
+        this.url.flag=false;
         this.route.navigateByUrl("/urls");
       }
     

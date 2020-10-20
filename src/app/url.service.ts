@@ -8,13 +8,13 @@ import { Router } from '@angular/router';
 })
 export class UrlService {
   urls=new BehaviorSubject<any>("");
-  public flag:boolean=false;
+  public flag:boolean;
   constructor(private http:HttpClient,private route:Router,private auth:AuthService) { }
   
   async createUrl(Urls)
   {
     let res = await this.http.post('https://social--auth.herokuapp.com/createurl', {urls:Urls}).toPromise();
-    
+    this.flag=true;
   }
    async getUrl()
   { 
