@@ -35,7 +35,7 @@ export class UrlsComponent implements OnInit {
     
   })
   }
-  async Validate()
+   Validate()
   {
     this.haserror=false;
     if(this.Urldata.shorturl=="https://social--auth.herokuapp.com/")
@@ -44,11 +44,14 @@ export class UrlsComponent implements OnInit {
     }
     else
     {
-      let result = await this.http.get('https://social--auth.herokuapp.com/checkurl/'+encodeURIComponent(this.Urldata.shorturl)).toPromise();
-    console.log(result);
-    if(!result["status"]){
-      this.haserror=true;
+     this.http.get('https://social--auth.herokuapp.com/checkurl/'+encodeURIComponent(this.Urldata.shorturl)).subscribe((data)=>
+     {
+      console.log(data);
+      if(!data["status"]){
+        this.haserror=true;
     }
+     })
+    
   }
   console.log(this.haserror);
     
