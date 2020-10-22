@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UrlService } from './../url.service';
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-urls',
   templateUrl: './urls.component.html',
@@ -16,6 +17,7 @@ export class UrlsComponent implements OnInit {
   Urldata={originalurl:"",shorturl:"https://social--auth.herokuapp.com/"};
   ngOnInit(): void {
     this.haserror=false;
+    this.getallUrls();
   }
   async Create()
   {
@@ -35,6 +37,7 @@ export class UrlsComponent implements OnInit {
   }
   async Validate()
   {
+    this.haserror=false;
     if(this.Urldata.shorturl=="https://social--auth.herokuapp.com/")
     {
       this.haserror=true;
@@ -46,7 +49,8 @@ export class UrlsComponent implements OnInit {
     if(!result["status"]){
       this.haserror=true;
     }
-    }
+  }
+  console.log(this.haserror);
     
   }
 }
