@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UrlService } from './../url.service';
 import { Component, OnInit } from '@angular/core';
@@ -9,21 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UrlsComponent implements OnInit {
 
-  constructor(public url:UrlService,private route:Router) { }
+  constructor(public url:UrlService,private route:Router,private http:HttpClient) { }
   Allurls;
-  display;
+  haserror;
   Urldata={originalurl:"",shorturl:"https://social--auth.herokuapp.com/"};
-
   ngOnInit(): void {
-    this.getallUrls();
-    this.display=false;
+    this.haserror=false;
   }
-  Create()
+  async Create()
   {
-    this.url.createUrl(this.Urldata);
-    console.log(this.Urldata);
-    this.url.flag=true;
-    this.display=true;
+      this.url.createUrl(this.Urldata);
+      console.log(this.Urldata);
+      this.url.flag=true;
     //window.location.href="/";
   }
   getallUrls()
@@ -34,7 +32,21 @@ export class UrlsComponent implements OnInit {
     console.log(this.Allurls);
     
   })
-
-  
+  }
+  async Validate()
+  {
+    if(this.Urldata.shorturl=="https://social--auth.herokuapp.com/")
+    {
+      this.haserror=true;
+    }
+    else
+    {
+      let result = await this.http.get('https://social--auth.herokuapp.com/checkurl/'+encodeURIComponent(this.Urldata.shorturl)).toPromise();
+    console.log(result);
+    if(!result["status"]){
+      this.haserror=true;
+    }
+    }
+    
   }
 }

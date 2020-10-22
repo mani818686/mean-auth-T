@@ -1,36 +1,47 @@
-<div class="container" *ngIf="this.display && url.result"class="alert alert-success alert-dismissible fade show" role="alert">
+<!--
+  <div class="d-none" class="alert alert-success alert-dismissible fade show" role="alert">
     Your Url is Successfully Created !
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
 </div>
-<div class="container" *ngIf="this.display && !url.result" class="alert alert-danger alert-dismissible fade show" role="alert">
+<div class="d-none" class="alert alert-danger alert-dismissible fade show" role="alert">
     Your Url is already Exists! Please Try again with Another Url....
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
+-->
 <div class="container">
-  <form class="m-3">
-    <div class="form-group">
-      <label><h5>Original Url</h5></label>
-      <input
+  <form class="m-3" #UrlForm="ngForm" novalidate>
+    <div class="form-group" >
+      <label>Original Url</label>
+      <input 
         [(ngModel)]="Urldata.originalurl"
+        [class.is-invalid]="original.invalid && original.touched"
         name="originalurl"
         type="string"
+        #original="ngModel"
         class="form-control col-8"
+        required
       />
+      <small  class="text-danger" [class.d-none]="original.valid || original.untouched" > Url is required </small>
     </div>
     <div class="form-group">
-      <label><h5>ShortUrl</h5> </label>
+      <label>ShortUrl</label>
       <input
+        [class.is-invalid]="haserror && short.touched"
         [(ngModel)]="Urldata.shorturl"
+        (blur)="Validate()"
+        (change)="Validate()"
         name="shorturl"
         type="string"
+        #short="ngModel"
         class="form-control col-8"
       />
+      <small class="text-danger" [class.d-none]="!haserror || short.untouched"> Url is already Used Please try again with another Url</small>
     </div>
-    <button class="btn btn-primary" type="button" (click)="Create()">
+    <button [disabled]="haserror ||short.errors || original.errors || UrlForm.form.untouched"  class="btn btn-primary" type="button" (click)="Create()">
       Create
     </button>
   </form>
