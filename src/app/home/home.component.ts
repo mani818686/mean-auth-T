@@ -12,14 +12,6 @@ export class HomeComponent implements OnInit {
   constructor(private url:UrlService,private router:Router) { }
 
   ngOnInit(): void {
-    console.log(this.url.flag);
-    if(this.url.flag)
-      {
-        this.url.flag=false;
-        this.router.navigateByUrl("/urls");
-        
-      }
-    
   }
 
 }

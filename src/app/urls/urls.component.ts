@@ -14,7 +14,7 @@ export class UrlsComponent implements OnInit {
   constructor(public url:UrlService,private route:Router,private http:HttpClient) { }
   Allurls;
   haserror;
-  submitted:Boolean;
+  submitted:Boolean=false;
   Urldata={originalurl:"",shorturl:"https://social--auth.herokuapp.com/"};
   ngOnInit(): void {
     this.haserror=false;
@@ -24,8 +24,7 @@ export class UrlsComponent implements OnInit {
   async Create()
   {
       this.url.createUrl(this.Urldata);
-      console.log(this.Urldata);
-      this.url.flag=true;
+      console.log(this.Urldata); 
     //window.location.href="/";
   }
   getallUrls()
