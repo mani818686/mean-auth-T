@@ -31,7 +31,7 @@
       />
       <small class="text-danger" [class.d-none]="!haserror || short.untouched"> Url is already Used Please try again with another Url</small>
     </div>
-    <button [disabled]="short.errors || original.errors || UrlForm.form.untouched"  class="btn btn-primary" type="button" (click)="Validate();submitted=false">
+    <button [disabled]="short.errors || original.errors || UrlForm.form.untouched"  class="btn btn-primary" type="button" (click)="submitted=false;Validate();">
       Create
     </button>
   </form>
