@@ -1,11 +1,9 @@
-<!--
-  <div *ngIf="h" class="alert alert-success alert-dismissible fade show" role="alert">
+<div [hidden]="!submitted" class="alert alert-success alert-dismissible fade show" role="alert">
     Your Url is Successfully Created !
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
 </div>
--->
 <div class="container">
   <form class="m-3" #UrlForm="ngForm" novalidate>
     <div class="form-group" >
@@ -26,8 +24,6 @@
       <input
         [class.is-invalid]="haserror && short.touched"
         [(ngModel)]="Urldata.shorturl"
-        (blur)="Validate()"
-        (change)="Validate()"
         name="shorturl"
         type="string"
         #short="ngModel"
@@ -35,7 +31,7 @@
       />
       <small class="text-danger" [class.d-none]="!haserror || short.untouched"> Url is already Used Please try again with another Url</small>
     </div>
-    <button [disabled]="haserror ||short.errors || original.errors || UrlForm.form.untouched"  class="btn btn-primary" type="button" (click)="Create()">
+    <button [disabled]="short.errors || original.errors || UrlForm.form.untouched"  class="btn btn-primary" type="button" (click)="Validate();submitted=false">
       Create
     </button>
   </form>

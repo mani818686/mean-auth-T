@@ -14,9 +14,11 @@ export class UrlsComponent implements OnInit {
   constructor(public url:UrlService,private route:Router,private http:HttpClient) { }
   Allurls;
   haserror;
+  submitted:Boolean;
   Urldata={originalurl:"",shorturl:"https://social--auth.herokuapp.com/"};
   ngOnInit(): void {
     this.haserror=false;
+    this.submitted = false;
     this.getallUrls();
   }
   async Create()
@@ -46,10 +48,17 @@ export class UrlsComponent implements OnInit {
     {
      this.http.get('https://social--auth.herokuapp.com/checkurl/'+encodeURIComponent(this.Urldata.shorturl)).subscribe((data)=>
      {
-      console.log(data);
-      if(!data["status"]){
-        this.haserror=true;
-    }
+        console.log(data);
+        if(!data["status"])
+          this.haserror=true;
+          else
+          {
+            this.Create();
+            this.url.getUrl();
+            this.submitted=true;
+            this.getallUrls();
+          }
+      
      })
     
   }

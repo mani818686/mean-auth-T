@@ -23,6 +23,7 @@ export class AuthService {
     console.log(this.user);
     } catch(e){
       console.log("error occured"+JSON.stringify(e));
+      this.router.navigateByUrl("/login");
     }
     this.router.navigateByUrl("/urls");
   }
