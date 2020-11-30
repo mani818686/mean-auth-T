@@ -15,7 +15,7 @@ export class UrlsComponent implements OnInit {
   Allurls;
   haserror;
   submitted:Boolean=false;
-  Urldata={originalurl:"",shorturl:"https://social--auth.herokuapp.com/"};
+  Urldata={originalurl:"",shorturl:""};
   ngOnInit(): void {
     this.haserror=false;
     this.submitted = false;

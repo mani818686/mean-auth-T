@@ -106,7 +106,7 @@ app.post("/createurl",async (req,res)=>
     catch(e){
         console.log("error occured"+e);
     }
-    var newurl=new Url({username:req.session.user.name,originalurl:urldata.originalurl,shorturl:urldata.shorturl});
+    var newurl=new Url({username:req.session.user.name,originalurl:urldata.originalurl,shorturl:"https://social--auth.herokuapp.com/"+urldata.shorturl});
     let url=newurl.save();
     res.json(urldata);
 });
