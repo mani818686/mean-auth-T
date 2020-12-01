@@ -40,7 +40,7 @@ export class UrlsComponent implements OnInit {
   {
     this.haserror=false;
     this.submitted=false;
-    if(this.Urldata.shorturl=="https://social--auth.herokuapp.com/")
+    if('https://social--auth.herokuapp.com/checkurl/'+this.Urldata.shorturl=="https://social--auth.herokuapp.com/")
     {
       this.haserror=true;
     }
