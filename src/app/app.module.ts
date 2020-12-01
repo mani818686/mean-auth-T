@@ -15,7 +15,7 @@ import { PremiumComponent } from './premium/premium.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SocialLoginModule, SocialAuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider} from 'angularx-social-login';
 import { UrlsComponent } from './urls/urls.component';
-import {HashLocationStrategy,LocationStrategy} from '@angular/common';
+import {HashLocationStrategy,LocationStrategy,Location} from '@angular/common'
 
 
 @NgModule({

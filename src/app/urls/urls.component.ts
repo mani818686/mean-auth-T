@@ -46,7 +46,7 @@ export class UrlsComponent implements OnInit {
     }
     else
     {
-     this.http.get('https://social--auth.herokuapp.com/checkurl/'+encodeURIComponent(this.Urldata.shorturl)).subscribe((data)=>
+     this.http.get('https://social--auth.herokuapp.com/checkurl/'+encodeURIComponent("https://social--auth.herokuapp.com/"+this.Urldata.shorturl)).subscribe((data)=>
      {
         console.log(data);
         if(!data["status"])
