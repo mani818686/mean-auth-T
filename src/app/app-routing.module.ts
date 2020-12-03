@@ -13,7 +13,7 @@ const routes: Routes = [
   {path:'premium', component:PremiumComponent},
   {path:'login', component:LoginComponent},
   {path:'signup', component:SignupComponent},
-  {path:'urls', component:UrlsComponent},
+  {path:'urls', component:UrlsComponent,canActivate:[AuthGuard]},
   {path:'profile', component:ProfileComponent,canActivate:[AuthGuard]},
   {path:'', component:HomeComponent},
   {path:'**', redirectTo:''}
