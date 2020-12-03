@@ -57,6 +57,7 @@ export class UrlsComponent implements OnInit {
             this.url.getUrl();
             this.submitted=true;
             this.getallUrls();
+            this.Urldata.shorturl=this.Urldata.originalurl="";
           }
       
      })
