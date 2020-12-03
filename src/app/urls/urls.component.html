@@ -32,24 +32,25 @@
       </div>
       <small class="text-danger" [class.d-none]="!haserror || short.untouched"> Url is already Used Please try again with another Url</small>
     </div>
+    <br>
     <button [disabled]="short.errors || original.errors || UrlForm.form.untouched"  class="btn btn-primary" type="button" (click)="submitted=false;Validate();">
       Create
     </button>
   </form>
 </div>
 <div class="container">
-  <h2>Recent Urls</h2>
+  <h2>Your Recent Urls</h2>
   <table class="table">
     <thead>
-      <tr>
-        <th>Original Url</th>
-        <th>ShortUrl</th>
+      <tr class="row">
+        <th class="col">Original Url</th>
+        <th class="col">ShortUrl</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let u of Allurls">
-        <td>{{ u.originalurl }}</td>
-        <td>{{ u.shorturl }}</td>
+      <tr class="row" *ngFor="let u of Allurls">
+        <td class="col">{{ u.originalurl }}</td>
+        <td class="col">{{ u.shorturl }}</td>
       </tr>
     </tbody>
   </table>
