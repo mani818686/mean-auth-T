@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { SocialAuthService,GoogleLoginProvider,FacebookLoginProvider } from 'angularx-social-login';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, throwError } from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import { Router } from '@angular/router';
-import { strictEqual } from 'assert';
-import { stringify } from '@angular/compiler/src/util';
+import { isEmptyExpression } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -12,16 +11,17 @@ import { stringify } from '@angular/compiler/src/util';
 export class AuthService {
   public session;
   public user;
-
   constructor(private auth:SocialAuthService,private http:HttpClient,private router:Router) { }
   async googleLogin() {
     try {
     let socialUser = await this.auth.signIn(GoogleLoginProvider.PROVIDER_ID);
     let res = await this.http.post('https://social--auth.herokuapp.com/api/google/verify', {token: socialUser.idToken}).toPromise();
-    let status=await this.http.get('https://social--auth.herokuapp.com/api/session').toPromise(); 
-    this.user=status["user"];
+    console.log(res["user"]);
+    this.user=res["user"];
     console.log(this.user);
-    } catch(e){
+    if(Object.keys(this.user).length==0)
+      throwError("No User");
+  } catch(e){
       console.log("error occured"+JSON.stringify(e));
       this.router.navigateByUrl("/login");
     }

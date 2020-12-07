@@ -89,10 +89,10 @@ app.post('/api/google/verify', async (req, res) => {
             );
             user = await newUser.save();
         }
-        res.json({ msg: "Okay"});
+        res.json({ user:req.session.user});
     } catch (e) {
         console.log('Error while google verify ' + e);
-        res.status(401).json({ msg: "Noooo" });
+        res.status(401).json({ user:{} });
     }
 })
 
