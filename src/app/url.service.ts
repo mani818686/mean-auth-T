@@ -11,7 +11,7 @@ export class UrlService {
   public flag:boolean=false;
 
   public result;
-  constructor(private http:HttpClient,private route:Router,private auth:AuthService) { }
+  constructor(private http:HttpClient,private route:Router) { }
   
   async createUrl(Urls)
   {
@@ -22,7 +22,7 @@ export class UrlService {
   { 
     let user;
     try{
-      user=this.auth.user.name;
+      user=localStorage.username;
     }
     catch(e)
     {user=null;}

@@ -18,6 +18,7 @@ export class AuthService {
     let res = await this.http.post('https://social--auth.herokuapp.com/api/google/verify', {token: socialUser.idToken}).toPromise();
     console.log(res["user"]);
     this.user=res["user"];
+    localStorage.username=this.user.name;
     if(Object.keys(this.user).length==0)
       throwError("No User");
   } catch(e){
@@ -31,6 +32,7 @@ export class AuthService {
     var resp;
     try{
       await this.auth.signOut();
+      localStorage.clear;
     }
     catch(e)
     { 
