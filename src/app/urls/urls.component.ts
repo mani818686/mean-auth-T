@@ -40,13 +40,14 @@ export class UrlsComponent implements OnInit {
   {
     this.haserror=false;
     this.submitted=false;
-    if('https://social--auth.herokuapp.com/checkurl/'+this.Urldata.shorturl=="https://social--auth.herokuapp.com/")
+    const Url='https://social--auth.herokuapp.com/';
+    if(Url+this.Urldata.shorturl==Url)
     {
       this.haserror=true;
     }
     else
     {
-     this.http.get('https://social--auth.herokuapp.com/checkurl/'+encodeURIComponent("https://social--auth.herokuapp.com/"+this.Urldata.shorturl)).subscribe((data)=>
+     this.http.get(Url+'checkurl/'+encodeURIComponent(Url+this.Urldata.shorturl)).subscribe((data)=>
      {
         console.log(data);
         if(!data["status"])
