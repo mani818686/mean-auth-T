@@ -30,8 +30,8 @@ export class AuthService {
   }
   async Logout() {
     var resp;
+    localStorage.clear();
     try{
-      localStorage.clear;
       await this.auth.signOut();
       
     }
