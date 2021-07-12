@@ -45,7 +45,7 @@ import {HashLocationStrategy,LocationStrategy,Location} from '@angular/common'
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              '709679406974-ct18mkgug340hf9682gmkm04qhgj8rj4.apps.googleusercontent.com'
+              '293025296253-ouli4ghkccks3puips95tdmeiqlvvq68.apps.googleusercontent.com'
             ),
           },
           {
