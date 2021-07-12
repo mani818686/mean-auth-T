@@ -39,11 +39,11 @@ app.use((req,res,next)=>
 })
 const { OAuth2Client } = require('google-auth-library');
 const { stringify } = require('querystring');
-const client = new OAuth2Client('709679406974-ct18mkgug340hf9682gmkm04qhgj8rj4.apps.googleusercontent.com');
+const client = new OAuth2Client('293025296253-ouli4ghkccks3puips95tdmeiqlvvq68.apps.googleusercontent.com');
 async function verify(token) {
     const ticket = await client.verifyIdToken({
         idToken: token,
-        audience: '709679406974-ct18mkgug340hf9682gmkm04qhgj8rj4.apps.googleusercontent.com',  // Specify the CLIENT_ID of the app that accesses the backend
+        audience: '293025296253-ouli4ghkccks3puips95tdmeiqlvvq68.apps.googleusercontent.com',  // Specify the CLIENT_ID of the app that accesses the backend
     });
     const payload = ticket.getPayload();
     const userid = payload['sub'];
