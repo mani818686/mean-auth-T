@@ -20,16 +20,21 @@
       <small  class="text-danger" [class.d-none]="original.valid || original.untouched" > Url is required </small>
     </div>
     <div class="form">
-      <label>ShortUrl</label><div style="border-style:solid;border-color:lightgrey;border-radius:5px;width:48%">
-     https://social--auth.herokuapp.com/<input style="display:inline;border-width:0px; border:none;"
-        [class.is-invalid]="haserror && short.touched"
+      <label>ShortUrl</label>
+
+    <div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon3">https://social--auth.herokuapp.com/</span>
+  </div>
+  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"
+  [class.is-invalid]="haserror && short.touched"
         [(ngModel)]="Urldata.shorturl"
         name="shorturl"
         type="string"
         #short="ngModel"
         class="form-control col-6"
-      />
-      </div>
+  >
+</div>
       <small class="text-danger" [class.d-none]="!haserror || short.untouched"> Url is already Used Please try again with another Url</small>
     </div>
     <br>
